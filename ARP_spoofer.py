@@ -32,8 +32,8 @@ try:
 		print("\rARP poisoned packets sent: " + str(packets_sent), end="")
 		time.sleep(2)
 except KeyboardInterrupt:
-	print("\nStopped sending packets.")
-	print("Disabling IP forwarding and exiting the program..")
+	print("\n[+] Stopped sending packets.")
+	print("[+] Disabling IP forwarding and exiting the program..")
 	subprocess.call("echo 0 > /proc/sys/net/ipv4/ip_forward", stdout = FNULL, shell = True)
 	FNULL.close()
 	sys.exit(0)
