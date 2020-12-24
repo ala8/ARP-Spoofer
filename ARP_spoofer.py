@@ -33,6 +33,14 @@ try:
 		time.sleep(2)
 except KeyboardInterrupt:
 	print("\n[+] Stopped sending packets.")
+	
+	restore_router = scapy.ARP(op = 2, pdst = router_ip, hwdst = get_mac_from_ip(router_ip), psrc = victim_ip, hwsrc = get_mac_from_ip(victim_ip))
+	restore_victim = scapy.ARP(op = 2, pdst = victim_ip, hwdst = get_mac_from_ip(victim_ip), psrc = router_ip, hwsrc = get_mac_from_ip(router_ip))
+	
+	scapy.send(restore_router, verbose = False)
+	scapy.send(restore_victim, verbose = False)
+	print("[+] Restored the victim's and router's correct settings")
+	
 	print("[+] Disabling IP forwarding and exiting the program..")
 	subprocess.call("echo 0 > /proc/sys/net/ipv4/ip_forward", stdout = FNULL, shell = True)
 	FNULL.close()
