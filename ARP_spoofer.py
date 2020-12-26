@@ -1,3 +1,7 @@
+# USAGE (2 parameters: target_ip and router_ip): (python2/python3) arp_spoofer.py target_ip router_ip
+# EXAMPLE: python2 arp_spoofer.py 192.168.1.107 192.168.1.1
+# MADE FOR EDUCATIONAL PURPOSES ONLY!
+
 import scapy.all as scapy
 import sys
 import re as regex
